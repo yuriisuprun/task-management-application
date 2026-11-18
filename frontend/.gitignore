@@ -1,32 +1,168 @@
-# Dependencies
+# ========================================
+# FRONTEND GITIGNORE
+# React/Node.js/TypeScript specific rules
+# ========================================
+
+# ========== DEPENDENCIES ==========
+# Node modules (never commit)
 node_modules/
-.pnp
+jspm_packages/
+/.pnp
 .pnp.js
 
-# Testing
+# Package managers
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.pnpm-store/
+.yarn/
+!.yarn/releases/
+!.yarn/plugins/
+!.yarn/sdks/
+!.yarn/versions/
+
+# ========== BUILD OUTPUT ==========
+# Vite
+dist/
+dist-ssr/
+.vite/
+.vite-temp/
+.cache/
+.cache-temp/
+
+# Other build tools
+build/
+out/
+.next/
+.nuxt/
 coverage/
 
-# Production
-.next/
-out/
-build/
-dist/
-
-# Misc
-.DS_Store
-*.pem
-.env
-.env.local
-.env.*.local
-
-# Debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# IDE
+# ========== IDE & EDITOR ==========
+# VS Code
 .vscode/
+.vscode-test
+.history/
+*.code-workspace
+
+# IntelliJ IDEA
 .idea/
+*.iml
+*.iws
+*.ipr
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
 *.swp
 *.swo
 *~
+.vim/
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# ========== DEVELOPMENT CACHE ==========
+.eslintcache
+.prettierignore
+.stylelintcache
+.jest/
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# ========== LOGS ==========
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+debug.log
+logs/
+*.log
+
+# ========== TESTING ==========
+coverage/
+.nyc_output/
+junit.xml
+test-results/
+.jest/
+
+# ========== ENVIRONMENT & SECRETS ==========
+# Environment variables (never commit)
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.staging
+
+# Secrets
+*.pem
+*.key
+*.crt
+private_key
+secret.txt
+credentials.json
+secrets/
+.secrets/
+
+# ========== OS FILES ==========
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.VisualState.xml
+
+# Linux
+.Xauthority
+.bash_history
+
+# ========== TEMPORARY FILES ==========
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+*#
+.#*
+
+# ========== RUNTIME DATA ==========
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ========== MISC ==========
+.local/
+.testcontainers.properties
+.storybook-static/
+storybook-static/
+
+# ========== CI/CD ==========
+.github/workflows/local-*.yml
+
+# Don't ignore these even though they match patterns above
+!.gitkeep
+!.env.example
+!.env.template
+!.env.example.local

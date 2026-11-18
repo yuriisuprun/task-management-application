@@ -1,33 +1,193 @@
-HELP.md
+# ========================================
+# BACKEND GITIGNORE
+# Java/Spring Boot specific rules
+# ========================================
+
+# ========== BUILD & COMPILATION ==========
+# Maven
 target/
+pom.xml.tag
+pom.xml.releaseBackup
+release.properties
+.flattened-pom.xml
+maven-eclipse.xml
+.mvn/
+mvn
+mvnw
+mvnw.cmd
+
+# Maven Wrapper
 .mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
+# Gradle
+.gradle/
+build/
+gradle/
+gradlew
+gradlew.bat
+gradle.properties
+settings.gradle
+settings.gradle.kts
+build.gradle
+build.gradle.kts
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# Build outputs
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+bin/
+out/
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# ========== IDE SPECIFIC ==========
+# IntelliJ IDEA
+.idea/
 *.iml
+*.iws
 *.ipr
+.idea_modules/
+out/
 
-### NetBeans ###
+# Eclipse
+.project
+.classpath
+.c9/
+.settings/
+*.launch
+.factorypath
+
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
+nbactions.xml
+nb-configuration.xml
 
-### VS Code ###
+# VS Code
 .vscode/
+.devcontainer/
+*.code-workspace
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# ========== JAVA SPECIFIC ==========
+# Compiled class files
+*.class
+
+# Log files
+*.log
+logs/
+npm-debug.log*
+
+# Spring Boot specific
+*.pid
+application-local.properties
+application-dev.properties
+application-test.properties
+.sts4-cache/
+
+# Package Files
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Runtime
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# ========== DEPENDENCY MANAGEMENT ==========
+# Maven local repository
+.m2/
+.maven/
+maven.log
+dependency-reduced-pom.xml
+
+# Gradle local cache
+.gradle/
+gradle/
+
+# ========== DATABASE ==========
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+database.sqlite
+data/
+
+# ========== ENVIRONMENT & CONFIGURATION ==========
+# Environment variables (never commit)
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.staging
+
+# Secrets
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+private_key
+secret.txt
+credentials.json
+secrets/
+.secrets/
+keystore
+keystore.jks
+
+# ========== TESTING ==========
+# JUnit/Test reports
+target/test-results/
+target/surefire-reports/
+junit.xml
+.jest/
+coverage/
+.nyc_output/
+test-results/
+
+# ========== TEMPORARY FILES ==========
+tmp/
+temp/
+.cache/
+cache/
+
+# ========== OS FILES ==========
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ========== VCS ==========
+*.orig
+*.rej
+
+# ========== MISC ==========
+.local/
+.testcontainers.properties
+hs_err_pid*.log
+
+# Don't ignore these even though they match patterns above
+!.gitkeep
+!.env.example
+!.env.template
