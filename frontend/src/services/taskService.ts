@@ -54,6 +54,28 @@ async function handleResponse<T>(response: Response): Promise<T> {
 }
 
 /**
+ * Transform Spring Page response to PaginatedResponse
+ * Spring returns: { content, totalElements, totalPages, number, size, etc }
+ * Frontend expects: { content, totalElements, totalPages, currentPage, pageSize, hasMore }
+ */
+function transformPageResponse<T>(springPage: any): PaginatedResponse<T> {
+  const totalElements = springPage.totalElements ?? 0;
+  const pageSize = springPage.size ?? 10;
+  const totalPages = springPage.totalPages ?? 0;
+  const currentPage = springPage.number ?? 0;
+  const hasMore = currentPage < totalPages - 1;
+
+  return {
+    content: springPage.content ?? [],
+    totalElements: totalElements,
+    totalPages: totalPages,
+    currentPage: currentPage,
+    pageSize: pageSize,
+    hasMore: hasMore,
+  };
+}
+
+/**
  * Task Service - handles all API communication with the backend
  */
 export const taskService = {
@@ -70,7 +92,8 @@ export const taskService = {
       queryParams.append('size', (params.pageSize || 10).toString());
       
       const response = await fetch(`${API_BASE_URL}/filter?${queryParams.toString()}`);
-      return handleResponse<PaginatedResponse<TaskResponse>>(response);
+      const data = await handleResponse<any>(response);
+      return transformPageResponse(data);
     }
 
     // If only status is provided, use the status filter endpoint
@@ -81,7 +104,8 @@ export const taskService = {
       queryParams.append('size', (params.pageSize || 10).toString());
       
       const response = await fetch(`${API_BASE_URL}/filter/status?${queryParams.toString()}`);
-      return handleResponse<PaginatedResponse<TaskResponse>>(response);
+      const data = await handleResponse<any>(response);
+      return transformPageResponse(data);
     }
 
     // If only title is provided, use the search endpoint
@@ -92,7 +116,8 @@ export const taskService = {
       queryParams.append('size', (params.pageSize || 10).toString());
       
       const response = await fetch(`${API_BASE_URL}/search?${queryParams.toString()}`);
-      return handleResponse<PaginatedResponse<TaskResponse>>(response);
+      const data = await handleResponse<any>(response);
+      return transformPageResponse(data);
     }
 
     // Otherwise, use the standard getAllTasks endpoint
@@ -104,7 +129,8 @@ export const taskService = {
     });
 
     const response = await fetch(`${API_BASE_URL}${queryString}`);
-    return handleResponse<PaginatedResponse<TaskResponse>>(response);
+    const data = await handleResponse<any>(response);
+    return transformPageResponse(data);
   },
 
   /**
@@ -170,7 +196,8 @@ export const taskService = {
     queryParams.append('size', pageSize.toString());
     
     const response = await fetch(`${API_BASE_URL}/search?${queryParams.toString()}`);
-    return handleResponse<PaginatedResponse<TaskResponse>>(response);
+    const data = await handleResponse<any>(response);
+    return transformPageResponse(data);
   },
 
   /**
@@ -187,6 +214,7 @@ export const taskService = {
     queryParams.append('size', pageSize.toString());
     
     const response = await fetch(`${API_BASE_URL}/filter/status?${queryParams.toString()}`);
-    return handleResponse<PaginatedResponse<TaskResponse>>(response);
+    const data = await handleResponse<any>(response);
+    return transformPageResponse(data);
   },
 };
