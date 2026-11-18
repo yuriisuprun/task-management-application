@@ -77,6 +77,22 @@ export const TaskList: React.FC = () => {
   }, [fetchTasks]);
 
   /**
+   * Keyboard shortcuts
+   */
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Ctrl+N or Cmd+N to create task
+      if ((e.ctrlKey || e.metaKey) && e.key === 'n') {
+        e.preventDefault();
+        handleCreateTask();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
+  /**
    * Handle search input change
    */
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -217,12 +233,14 @@ export const TaskList: React.FC = () => {
             value={searchTitle}
             onChange={handleSearchChange}
             disabled={isLoading}
+            aria-label="Search tasks by title"
           />
           <select
             className="toolbar-select"
             value={filterStatus}
             onChange={handleStatusFilterChange}
             disabled={isLoading}
+            aria-label="Filter tasks by status"
           >
             <option value="">All Status</option>
             {Object.values(TaskStatus).map((status) => (
@@ -233,11 +251,14 @@ export const TaskList: React.FC = () => {
           </select>
         </div>
         <button
-          className="btn btn-primary"
+          className="btn btn-primary btn-create-task"
           onClick={handleCreateTask}
           disabled={isLoading}
+          aria-label="Create a new task"
+          title="Create a new task (Ctrl+N)"
         >
-          + Create Task
+          <span style={{ fontSize: '1.25rem' }}>+</span>
+          Create Task
         </button>
       </div>
 
