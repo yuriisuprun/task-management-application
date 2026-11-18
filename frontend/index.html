@@ -1,13 +1,56 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Character encoding and viewport -->
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+
+    <!-- Page metadata -->
     <title>Task Management Application</title>
+    <meta name="description" content="Stay organized and productive with our simple, powerful task management tool. Create, organize, and track your tasks effortlessly." />
+    <meta name="theme-color" content="#4F46E5" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- Favicon - Modern approach with fallbacks -->
+    <!-- SVG favicon (preferred for modern browsers - scalable, crisp) -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- PNG favicon fallback for older browsers -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <!-- Apple touch icon for iOS home screen -->
+    <link rel="apple-touch-icon" href="/favicon-32x32.png" />
+
+    <!-- PWA manifest for installable web app -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Web app metadata for browsers -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Task Manager" />
+
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Task Management Application" />
+    <meta property="og:description" content="Stay organized and productive with our simple, powerful task management tool" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://taskmanager.app" />
+    <meta property="og:image" content="/favicon.svg" />
+
+    <!-- Twitter card for social sharing -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Task Management Application" />
+    <meta name="twitter:description" content="Stay organized and productive with our simple, powerful task management tool" />
+    <meta name="twitter:image" content="/favicon.svg" />
+
+    <!-- Security and performance headers -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+    <!-- Accessibility metadata -->
+    <meta name="format-detection" content="telephone=no" />
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Main app container with proper accessibility attributes -->
+    <div id="root" role="application" aria-label="Task Management Application"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

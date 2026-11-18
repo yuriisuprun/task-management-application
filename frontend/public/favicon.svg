@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Background -->
+  <rect width="100" height="100" fill="#4F46E5" rx="20"/>
+  
+  <!-- Checkmark (represents completed tasks) -->
+  <g transform="translate(50, 50)">
+    <!-- Main checkmark -->
+    <path d="M -20 -5 L -5 10 L 20 -15" stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- Subtle clipboard outline -->
+    <rect x="-30" y="-25" width="60" height="50" fill="none" stroke="#FFFFFF" stroke-width="3" rx="4" opacity="0.3"/>
+  </g>
+</svg>
