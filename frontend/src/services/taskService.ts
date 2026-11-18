@@ -16,7 +16,7 @@ function buildQueryString(params: TaskQueryParams): string {
   const queryParams = new URLSearchParams();
 
   if (params.page !== undefined) queryParams.append('page', params.page.toString());
-  if (params.pageSize !== undefined) queryParams.append('pageSize', params.pageSize.toString());
+  if (params.pageSize !== undefined) queryParams.append('size', params.pageSize.toString());
   if (params.title) queryParams.append('title', params.title);
   if (params.status) queryParams.append('status', params.status);
   if (params.sortBy) queryParams.append('sortBy', params.sortBy);
@@ -61,10 +61,46 @@ export const taskService = {
    * Fetch paginated list of tasks with optional filters and search
    */
   async getTasks(params: TaskQueryParams): Promise<PaginatedResponse<TaskResponse>> {
+    // If both status and title are provided, use the combined filter endpoint
+    if (params.status && params.title) {
+      const queryParams = new URLSearchParams();
+      queryParams.append('status', params.status);
+      queryParams.append('query', params.title);
+      queryParams.append('page', (params.page || 0).toString());
+      queryParams.append('size', (params.pageSize || 10).toString());
+      
+      const response = await fetch(`${API_BASE_URL}/filter?${queryParams.toString()}`);
+      return handleResponse<PaginatedResponse<TaskResponse>>(response);
+    }
+
+    // If only status is provided, use the status filter endpoint
+    if (params.status) {
+      const queryParams = new URLSearchParams();
+      queryParams.append('status', params.status);
+      queryParams.append('page', (params.page || 0).toString());
+      queryParams.append('size', (params.pageSize || 10).toString());
+      
+      const response = await fetch(`${API_BASE_URL}/filter/status?${queryParams.toString()}`);
+      return handleResponse<PaginatedResponse<TaskResponse>>(response);
+    }
+
+    // If only title is provided, use the search endpoint
+    if (params.title) {
+      const queryParams = new URLSearchParams();
+      queryParams.append('query', params.title);
+      queryParams.append('page', (params.page || 0).toString());
+      queryParams.append('size', (params.pageSize || 10).toString());
+      
+      const response = await fetch(`${API_BASE_URL}/search?${queryParams.toString()}`);
+      return handleResponse<PaginatedResponse<TaskResponse>>(response);
+    }
+
+    // Otherwise, use the standard getAllTasks endpoint
     const queryString = buildQueryString({
       page: params.page || 0,
       pageSize: params.pageSize || 10,
-      ...params,
+      sortBy: params.sortBy,
+      sortOrder: params.sortOrder,
     });
 
     const response = await fetch(`${API_BASE_URL}${queryString}`);
@@ -128,11 +164,13 @@ export const taskService = {
     page: number = 0,
     pageSize: number = 10
   ): Promise<PaginatedResponse<TaskResponse>> {
-    return this.getTasks({
-      title,
-      page,
-      pageSize,
-    });
+    const queryParams = new URLSearchParams();
+    queryParams.append('query', title);
+    queryParams.append('page', page.toString());
+    queryParams.append('size', pageSize.toString());
+    
+    const response = await fetch(`${API_BASE_URL}/search?${queryParams.toString()}`);
+    return handleResponse<PaginatedResponse<TaskResponse>>(response);
   },
 
   /**
@@ -143,10 +181,12 @@ export const taskService = {
     page: number = 0,
     pageSize: number = 10
   ): Promise<PaginatedResponse<TaskResponse>> {
-    return this.getTasks({
-      status: status as any,
-      page,
-      pageSize,
-    });
+    const queryParams = new URLSearchParams();
+    queryParams.append('status', status);
+    queryParams.append('page', page.toString());
+    queryParams.append('size', pageSize.toString());
+    
+    const response = await fetch(`${API_BASE_URL}/filter/status?${queryParams.toString()}`);
+    return handleResponse<PaginatedResponse<TaskResponse>>(response);
   },
 };
