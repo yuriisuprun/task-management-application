@@ -21,7 +21,6 @@ export interface Task {
   priority: TaskPriority;
   dueDate: string | null;
   createdAt: string;
-  updatedAt: string;
 }
 
 // Create Task Request DTO
@@ -51,7 +50,6 @@ export interface TaskResponse {
   priority: TaskPriority;
   dueDate: string | null;
   createdAt: string;
-  updatedAt: string;
 }
 
 // Paginated Response

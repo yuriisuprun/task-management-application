@@ -24,8 +24,7 @@ public record TaskResponse(
     TaskStatus status,
     TaskPriority priority,
     LocalDate dueDate,
-    LocalDateTime createdAt,
-    LocalDateTime updatedAt
+    LocalDateTime createdAt
 ) {
     /**
      * Converts a Task entity to a TaskResponse DTO.
@@ -42,7 +41,6 @@ public record TaskResponse(
             .priority(task.getPriority())
             .dueDate(task.getDueDate())
             .createdAt(task.getCreatedAt())
-            .updatedAt(task.getUpdatedAt())
             .build();
     }
 }
