@@ -9,9 +9,6 @@ export const App: React.FC = () => {
         <div className="container">
           <div className="header-content">
             <h1 className="app-title">Task Management</h1>
-            <p style={{ color: 'var(--color-gray-500)', margin: 0, fontWeight: 500 }}>
-              Stay organized and productive
-            </p>
           </div>
         </div>
       </header>
